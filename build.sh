@@ -12,3 +12,8 @@ python manage.py collectstatic --noinput
 # Run migrations
 python manage.py migrate --noinput
 
+# Create superuser if environment variables are set
+if [ -n "$SUPERUSER_USERNAME" ] && [ -n "$SUPERUSER_PASSWORD" ]; then
+    python manage.py create_superuser
+fi
+
