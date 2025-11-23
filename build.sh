@@ -17,3 +17,6 @@ if [ -n "$SUPERUSER_USERNAME" ] && [ -n "$SUPERUSER_PASSWORD" ]; then
     python manage.py create_superuser
 fi
 
+# Import services and packages
+python manage.py import_services --file data/cleaned_data.json
+
