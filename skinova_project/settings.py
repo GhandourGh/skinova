@@ -283,6 +283,9 @@ if not DEBUG:
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     X_FRAME_OPTIONS = 'DENY'
+    
+    # CSRF settings for Render
+    CSRF_TRUSTED_ORIGINS = ['https://' + host for host in ALLOWED_HOSTS]
 
 # Session Security Settings (applies to both dev and production)
 SESSION_COOKIE_HTTPONLY = True  # Prevents JavaScript access to session cookie
