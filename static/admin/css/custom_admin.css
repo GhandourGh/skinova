@@ -1,0 +1,69 @@
+/* Custom Admin Styling for Skinova Clinic */
+
+/* Login page background */
+body.jazzmin-login-page {
+    background-image: url('/static/images/clinic.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+body.jazzmin-login-page .login-box {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    margin-top: 50px;
+}
+
+body.jazzmin-login-page .login-logo {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+body.jazzmin-login-page .login-logo img {
+    max-width: 300px;
+    height: auto;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+body.jazzmin-login-page .card {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+}
+
+/* Logo styling in sidebar - Make it bigger and prominent */
+.brand-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 10px !important;
+}
+
+.brand-link img {
+    max-height: 80px;
+    width: auto;
+    height: 80px;
+    margin: 0;
+}
+
+/* Hide brand text since we're using logo only */
+.brand-text {
+    display: none !important;
+}
+
+/* Ensure logo is visible in navbar as well */
+.navbar-brand img {
+    max-height: 50px;
+    width: auto;
+}
+
+/* Center logo in brand link when text is hidden */
+.brand-link:not(:has(.brand-text)) {
+    justify-content: center;
+}
+

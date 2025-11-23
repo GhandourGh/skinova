@@ -1,0 +1,182 @@
+{
+  "services": [
+    {
+      "name": "DEEP GLOW FACIAL",
+      "price": 50.0,
+      "duration": 60,
+      "sessions_required": 1,
+      "description": "Benefits: Removes dirt, oil, and dead skin Better absorption of serums Prevent clogged pores and breakout Leaves skin plump, soft, and glowing Reduces dryness and dullness Reducesfine lines and wrinkles Gives skin a silky even feel Reduces hyperpigmentation & dark spots Helps reduce enlarged pores overtime Boosts skin elasticity&collagen production Skin looks hydrated and radiant | Process: Fill Clients information form Skin analysis Double cleansing & exfoliation Soft peel Pro deep hydrafacial Diamond dermabrassion High frequency + pore refiner Cream Mask therapy Targeted ampoule treatment Ultrasonic serum infusion Luxury Jelly Mask Lip hydration Moisturize + SPF Skincare routine consultation (free gifts) Facial aftercare tips",
+      "is_active": true
+    },
+    {
+      "name": "DIAMOND INFUSION FACIAL",
+      "price": 50.0,
+      "duration": 60,
+      "sessions_required": 1,
+      "description": null,
+      "is_active": true
+    },
+    {
+      "name": "DETOX FACIAL",
+      "price": 50.0,
+      "duration": 60,
+      "sessions_required": 1,
+      "description": null,
+      "is_active": true
+    },
+    {
+      "name": "BOTOX CONTOUR FACIAL",
+      "price": 50.0,
+      "duration": 60,
+      "sessions_required": 1,
+      "description": null,
+      "is_active": true
+    },
+    {
+      "name": "Carboxy Treatment",
+      "price": 40.0,
+      "duration": 40,
+      "sessions_required": 1,
+      "description": "Benefits: 30--40mins Instant Glow, smooths and firms skin, reduce dullness and puffiness, boosts oxygen and circulation, safe for all skin types even during pregnancy and breastfeeding | Process: CO2 Carboxy Treatment package",
+      "is_active": true
+    },
+    {
+      "name": "Skinova CO2 Glow",
+      "price": 70.0,
+      "duration": 45,
+      "sessions_required": 1,
+      "description": "Benefits: Deep hydra + carboxy treatment",
+      "is_active": true
+    },
+    {
+      "name": "BIOPEEL Therapy",
+      "price": 150.0,
+      "duration": 45,
+      "sessions_required": 4,
+      "description": "Benefits: Italian, most popular no peel peels two phase chemical peel Visible glow and skin renewal withiut downtime or heavy peeling Immidiate results all types. Reduces acne, pigmentation, and fine lines 4 Sessions for visible results | Process: Biorepeel Therapy",
+      "is_active": true
+    },
+    {
+      "name": "MESO SKIN BOOSTER",
+      "price": 50.0,
+      "duration": 45,
+      "sessions_required": 1,
+      "description": "Benefits: Targets hyperpigmentation, acne scars, open pores, dark spots | Process: Mini facial+ Soft Peel + Full face microneedling, meso,mask",
+      "is_active": true
+    },
+    {
+      "name": "HAIR MESO",
+      "price": 40.0,
+      "duration": 30,
+      "sessions_required": 1,
+      "description": "Benefits: Scalp mesotherapy for hair growth | Process: Microneedling + meso",
+      "is_active": true
+    },
+    {
+      "name": "HYDRALIPS MESO",
+      "price": 5.0,
+      "duration": 15,
+      "sessions_required": 1,
+      "description": "Benefits: More plumpy and hydrated lips | Process: Cleanse+Scrub+Microneedling+Meso",
+      "is_active": true
+    },
+    {
+      "name": "EYE CONTOUR MESO",
+      "price": 10.0,
+      "duration": 20,
+      "sessions_required": 1,
+      "description": "Benefits: Targets dark circles, fine lines & puffiness | Process: Undereye cleansing + Meso eyes & caffeine + Microneedling",
+      "is_active": true
+    },
+    {
+      "name": "UNDERARM GLOW",
+      "price": 35.0,
+      "duration": 45,
+      "sessions_required": 1,
+      "description": "Benefits: Whitening treatment gently brightens, smooths, and evens skin tone. | Process: Deep cleansing+dermabrassion+ whitening mask+Kojic acid +microneedling",
+      "is_active": true
+    },
+    {
+      "name": "KNEE WHITENING",
+      "price": 35.0,
+      "duration": 45,
+      "sessions_required": 1,
+      "description": "Benefits: Whitening treatment gently brightens, smooths, and evens skin tone. | Process: Scrub+Dermabrassion+Meso+ Microneedling",
+      "is_active": true
+    },
+    {
+      "name": "ANTI CELLULITE",
+      "price": 30.0,
+      "duration": 45,
+      "sessions_required": 1,
+      "description": "Benefits: Reduces the appearance but never fades | Process: Microneedling + meso",
+      "is_active": true
+    },
+    {
+      "name": "EXOGLOW + PDRN",
+      "price": 150.0,
+      "duration": 60,
+      "sessions_required": 1,
+      "description": "Benefits: For next level rejuvenation. Skin lifting, Improves elasticity, fine lines, texture | Process: Mini facial+ Soft Peel + exoglow PDRN + calming mask",
+      "is_active": true
+    },
+    {
+      "name": "EXOHAIR",
+      "price": 150.0,
+      "duration": 45,
+      "sessions_required": 1,
+      "description": "Benefits: Exosomes infusion for hair growth. Strengthen hair follicles. For thinning hair and hairloss concerns | Process: Hair exosomes mesotherapy FOR 2.5ML",
+      "is_active": true
+    }
+  ],
+  "packages": [
+    {
+      "name": "HAIR TREATMENT PLAN (2 months)",
+      "price": null,
+      "price_display": "",
+      "description": "3 hair meso $120 3 hair exosomes $450",
+      "products": "Dr.Elies Saab Meso Exohair Exosomes",
+      "total_sessions": 8
+    },
+    {
+      "name": "SKIN BOOSTER PLAN (2 months)",
+      "price": 300.0,
+      "price_display": "$300 Instead of $470",
+      "description": "Week 1: Hydrafacial $50 Week 2: Face meso cocktail $60 Week 4: Exoglow PDRN $150 Week 6: Face Meso cocktail $60 Week 8: Exoglow $150",
+      "products": "Dr.Elies Saab Meso Exoglow Exosomes Mask Scrub and Cleansers",
+      "total_sessions": 5
+    },
+    {
+      "name": "LUXURY SKIN RESET (1 Month)",
+      "price": 200.0,
+      "price_display": "$200 Instead of $240",
+      "description": "Week 1 hydradiamond facial $50 Week 2 Exosome Skin Booster $100 Week 3 CO2 Facial $40 Week 4 Microneedling+meso vitamin $50",
+      "products": "Exoglow Exosome 2.5ML 2 cleansing Meso Exosomes Dr Elies 2.5 ML",
+      "total_sessions": 4
+    },
+    {
+      "name": "ANTI CELLULITE TREATMENT (6 Weeks)",
+      "price": 140.0,
+      "price_display": "$140 Instead of $180",
+      "description": "6 Microneedling+anticellulite Meso 1 Take Home Cream for Tretment",
+      "products": "Exosomes Dr Elies Cream",
+      "total_sessions": 6
+    },
+    {
+      "name": "KNEE/WHITENING WHITENING (6 Weeks)",
+      "price": 150.0,
+      "price_display": "$150 Instead of $210",
+      "description": "6 Customized whitening treatment: Deep Cleansing, diamond dermabrassion, microneedling, whitening mask",
+      "products": "Kojic Acid Oat Mask",
+      "total_sessions": 6
+    },
+    {
+      "name": "VIP BRIDAL TRANSFORMATION",
+      "price": 600.0,
+      "price_display": "$600 Instead of $855",
+      "description": "Month 1: SKIN DETOX: Week 1: Deep hydrafacial $50 Week 2: Microneedling + Meso $50 Week3: Underarms Whitening $35 Week4: Microneedling + PDRN $150 Month 2: Skin Repair: Week1: Botox Contouring Facial $50 Week 1: Underarms Whitening $35 Week 2: Microneedling Exoglow $150 Week 3: Underarms Whitening $35 Week 4: Microneedling Meso $50 Month3: Wedding Glow: Week 1: CO2 Facial $40 Week 1: Underarms Whitening $35 Week 2: Microneedling Exoglow $150 Week 3: Relaxing Massage $25 Week 4: Nails + Color $25",
+      "products": "Meso Dr Elies 5ML Exoglow PDRN Kojic Acid CO2",
+      "total_sessions": 4
+    }
+  ]
+}
