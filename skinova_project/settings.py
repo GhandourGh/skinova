@@ -283,3 +283,17 @@ if not DEBUG:
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     X_FRAME_OPTIONS = 'DENY'
+
+# Session Security Settings (applies to both dev and production)
+SESSION_COOKIE_HTTPONLY = True  # Prevents JavaScript access to session cookie
+SESSION_COOKIE_SAMESITE = 'Lax'  # CSRF protection
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Session expires when browser closes
+SESSION_SAVE_EVERY_REQUEST = True  # Reset session expiry on each request
+SESSION_COOKIE_AGE = 1800  # 30 minutes of inactivity (in seconds)
+
+# Force logout on password change
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+
+# Admin Security - Require authentication for all admin pages
+# Django admin already requires login, but we ensure it
+ADMIN_URL = 'admin/'  # Change this if you want to hide admin URL

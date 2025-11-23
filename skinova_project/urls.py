@@ -19,6 +19,8 @@ from django.urls import path, include
 from django.http import HttpResponse
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import views as auth_views
 
 # Jazzmin handles admin site customization
 
@@ -27,7 +29,9 @@ def home(request):
 
 urlpatterns = [
     path('', home, name='home'),
-    path('admin/', admin.site.urls),
+    path('admin/login/', auth_views.LoginView.as_view(), name='login'),
+    path('admin/logout/', auth_views.LogoutView.as_view(next_page='/admin/login/'), name='logout'),
+    path('admin/', admin.site.urls),  # Django admin already requires authentication
     path('client/', include('core.urls')),
     path('backup/', include('core.urls')),  # Backup management
 ]
