@@ -67,3 +67,58 @@ body.jazzmin-login-page .card {
     justify-content: center;
 }
 
+/* User Profile Section in Sidebar */
+.user-panel {
+    padding: 15px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-panel .image {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2D5016 0%, #4a7c2a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    margin-right: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.user-panel .info {
+    color: #fff;
+    flex: 1;
+}
+
+.user-panel .info a {
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.user-panel .info a:hover {
+    color: #a8d5ba;
+    text-decoration: none;
+}
+
+.user-panel .info small {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Sidebar user panel wrapper */
+.sidebar .user-panel {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
