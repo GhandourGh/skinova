@@ -179,25 +179,59 @@ def start_service_session(request, client_id):
         messages.error(request, 'Selected service not found or inactive.')
         return redirect('client_profile', client_id=client.id)
     
-    # Check if already tracking
+    # Create new session tracking (allow duplicates)
     try:
-        service_session, created = ClientServiceSession.objects.get_or_create(
+        service_session = ClientServiceSession.objects.create(
             client=client,
             service=service,
-            defaults={
-                'sessions_completed': 0,
-                'is_completed': False
-            }
+            sessions_completed=0,
+            is_completed=False
         )
         
-        if not created:
-            messages.info(request, 'Service session tracking already exists.')
-        else:
-            messages.success(request, f'Started tracking "{service.name}" sessions!')
+        messages.success(request, f'Started tracking "{service.name}" sessions!')
     except Exception as e:
         messages.error(request, f'Error starting service session: {str(e)}')
     
     return redirect('client_profile', client_id=client.id)
+
+
+@login_required
+@require_POST
+def delete_service_session(request, service_session_id):
+    """Delete a client service session"""
+    try:
+        service_session = get_object_or_404(ClientServiceSession, id=service_session_id)
+        client_id = service_session.client.id
+        service_name = service_session.service.name
+        service_session.delete()
+        messages.success(request, f'Removed service "{service_name}" from client.')
+    except Exception as e:
+        messages.error(request, f'Error removing service: {str(e)}')
+        # Try to redirect back to client profile if possible
+        if 'client_id' in locals():
+            return redirect('client_profile', client_id=client_id)
+        return redirect('admin:index')
+    
+    return redirect('client_profile', client_id=client_id)
+
+
+@login_required
+@require_POST
+def delete_client_package(request, client_package_id):
+    """Delete a client package assignment"""
+    try:
+        client_package = get_object_or_404(ClientPackage, id=client_package_id)
+        client_id = client_package.client.id
+        package_name = client_package.package.name
+        client_package.delete()
+        messages.success(request, f'Removed package "{package_name}" from client.')
+    except Exception as e:
+        messages.error(request, f'Error removing package: {str(e)}')
+        if 'client_id' in locals():
+            return redirect('client_profile', client_id=client_id)
+        return redirect('admin:index')
+    
+    return redirect('client_profile', client_id=client_id)
 
 
 @login_required
