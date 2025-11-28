@@ -179,10 +179,6 @@ def start_service_session(request, client_id):
         messages.error(request, 'Selected service not found or inactive.')
         return redirect('client_profile', client_id=client.id)
     
-    if service.sessions_required <= 1:
-        messages.warning(request, 'This service does not require session tracking.')
-        return redirect('client_profile', client_id=client.id)
-    
     # Check if already tracking
     try:
         service_session, created = ClientServiceSession.objects.get_or_create(
