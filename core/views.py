@@ -219,9 +219,11 @@ def adjust_session_count(request, item_type, item_id):
             if hasattr(item, 'add_session'):
                 if not item.is_completed:
                     item.add_session()
-                    messages.success(request, 'Session added.')
+                    if not request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                        messages.success(request, 'Session added.')
                 else:
-                    messages.warning(request, 'Already completed.')
+                    if not request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                        messages.warning(request, 'Already completed.')
             else:
                 # Manual increment if no method (fallback)
                 if item.sessions_completed < total_sessions:
@@ -230,7 +232,8 @@ def adjust_session_count(request, item_type, item_id):
                         item.is_completed = True
                         item.completed_date = datetime.now().date()
                     item.save()
-                    messages.success(request, 'Session added.')
+                    if not request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                        messages.success(request, 'Session added.')
                     
         elif action == 'decrement':
             if item.sessions_completed > 0:
@@ -238,11 +241,29 @@ def adjust_session_count(request, item_type, item_id):
                 item.is_completed = False
                 item.completed_date = None
                 item.save()
-                messages.success(request, 'Session removed.')
+                if not request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                    messages.success(request, 'Session removed.')
             else:
-                messages.warning(request, 'Cannot go below 0.')
+                if not request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                    messages.warning(request, 'Cannot go below 0.')
+        
+        # If AJAX request, return JSON with new state
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            item.refresh_from_db()
+            return JsonResponse({
+                'success': True,
+                'sessions_completed': item.sessions_completed,
+                'total_sessions': total_sessions,
+                'is_completed': item.is_completed,
+                'progress_percentage': item.get_progress_percentage(),
+                'completed_date': item.completed_date.strftime('%b %d, %Y') if item.completed_date else None,
+                'assigned_date': item.assigned_date.strftime('%b %d, %Y') if hasattr(item, 'assigned_date') else None,
+                'started_date': item.started_date.strftime('%b %d, %Y') if hasattr(item, 'started_date') else None,
+            })
                 
     except Exception as e:
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({'success': False, 'error': str(e)}, status=400)
         messages.error(request, f'Error adjusting session: {str(e)}')
         if client_id:
             return redirect('client_profile', client_id=client_id)
