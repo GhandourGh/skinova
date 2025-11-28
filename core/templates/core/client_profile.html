@@ -211,7 +211,27 @@
                             <div class="mb-3">
                                 <div class="flex items-center justify-between mb-1.5">
                                     <span class="text-xs font-semibold text-gray-600">Progress</span>
-                                    <span class="text-xs font-bold text-[#2D5016]">{{ cp.sessions_completed }}/{{ cp.package.total_sessions }}</span>
+                                    
+                                    <!-- Session Controls -->
+                                    <div class="flex items-center bg-gray-100 rounded-lg p-0.5">
+                                        <form method="post" action="{% url 'adjust_session_count' 'package' cp.id %}" class="flex">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="action" value="decrement">
+                                            <button type="submit" class="w-5 h-5 flex items-center justify-center rounded-md text-gray-600 hover:bg-white hover:shadow-sm hover:text-red-600 transition-all" {% if cp.sessions_completed == 0 %}disabled{% endif %}>
+                                                <i data-lucide="minus" class="w-3 h-3"></i>
+                                            </button>
+                                        </form>
+                                        
+                                        <span class="text-xs font-bold text-gray-800 px-2 min-w-[40px] text-center">{{ cp.sessions_completed }}/{{ cp.package.total_sessions }}</span>
+                                        
+                                        <form method="post" action="{% url 'adjust_session_count' 'package' cp.id %}" class="flex">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="action" value="increment">
+                                            <button type="submit" class="w-5 h-5 flex items-center justify-center rounded-md text-gray-600 hover:bg-white hover:shadow-sm hover:text-[#2D5016] transition-all" {% if cp.is_completed %}disabled{% endif %}>
+                                                <i data-lucide="plus" class="w-3 h-3"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                                 <div class="relative w-full h-2 bg-gray-200 rounded-full overflow-hidden">
                                     <div class="progress-bar-modern h-full rounded-full transition-all duration-500 ease-out" style="width: {{ cp.get_progress_percentage }}%">
@@ -220,22 +240,16 @@
                                 </div>
                             </div>
                             
-                            <!-- Action Button -->
+                            <!-- Action Button (Removed redundant Add Session button, kept date/status) -->
                             <div class="flex items-center justify-between pt-3 border-t border-gray-200/60">
-                                {% if not cp.is_completed %}
-                                <form method="post" action="{% url 'add_package_session' cp.id %}" class="inline">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn-primary inline-flex items-center px-4 py-2 rounded-lg text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all">
-                                        <i data-lucide="plus-circle" class="w-4 h-4 mr-1.5"></i>
-                                        Add Session
-                                    </button>
-                                </form>
-                                {% else %}
                                 <div class="flex items-center text-xs text-gray-500">
                                     <i data-lucide="calendar" class="w-3.5 h-3.5 mr-1.5"></i>
-                                    <span>{{ cp.completed_date|date:"M d, Y" }}</span>
+                                    {% if cp.is_completed %}
+                                        <span>Done: {{ cp.completed_date|date:"M d, Y" }}</span>
+                                    {% else %}
+                                        <span>Assigned: {{ cp.assigned_date|date:"M d, Y" }}</span>
+                                    {% endif %}
                                 </div>
-                                {% endif %}
                                 <div class="text-right">
                                     <span class="text-[10px] font-medium text-gray-400">Remaining: {{ cp.get_remaining_sessions }}</span>
                                 </div>
@@ -316,7 +330,27 @@
                             <div class="mb-3">
                                 <div class="flex items-center justify-between mb-1.5">
                                     <span class="text-xs font-semibold text-gray-600">Progress</span>
-                                    <span class="text-xs font-bold text-[#2D5016]">{{ ss.sessions_completed }}/{{ ss.service.sessions_required }}</span>
+                                    
+                                    <!-- Session Controls -->
+                                    <div class="flex items-center bg-gray-100 rounded-lg p-0.5">
+                                        <form method="post" action="{% url 'adjust_session_count' 'service' ss.id %}" class="flex">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="action" value="decrement">
+                                            <button type="submit" class="w-5 h-5 flex items-center justify-center rounded-md text-gray-600 hover:bg-white hover:shadow-sm hover:text-red-600 transition-all" {% if ss.sessions_completed == 0 %}disabled{% endif %}>
+                                                <i data-lucide="minus" class="w-3 h-3"></i>
+                                            </button>
+                                        </form>
+                                        
+                                        <span class="text-xs font-bold text-gray-800 px-2 min-w-[40px] text-center">{{ ss.sessions_completed }}/{{ ss.service.sessions_required }}</span>
+                                        
+                                        <form method="post" action="{% url 'adjust_session_count' 'service' ss.id %}" class="flex">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="action" value="increment">
+                                            <button type="submit" class="w-5 h-5 flex items-center justify-center rounded-md text-gray-600 hover:bg-white hover:shadow-sm hover:text-[#2D5016] transition-all" {% if ss.is_completed %}disabled{% endif %}>
+                                                <i data-lucide="plus" class="w-3 h-3"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                                 <div class="relative w-full h-2 bg-gray-200 rounded-full overflow-hidden">
                                     <div class="progress-bar-modern h-full rounded-full transition-all duration-500 ease-out" style="width: {{ ss.get_progress_percentage }}%">
@@ -325,24 +359,20 @@
                                 </div>
                             </div>
                             
-                            <!-- Action Button -->
+                            <!-- Action Button (Removed redundant Add Session button, kept date/status) -->
                             <div class="flex items-center justify-between pt-3 border-t border-gray-200/60">
-                                {% if not ss.is_completed %}
-                                <form method="post" action="{% url 'add_service_session' ss.id %}" class="inline">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn-primary inline-flex items-center px-4 py-2 rounded-lg text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all">
-                                        <i data-lucide="plus-circle" class="w-4 h-4 mr-1.5"></i>
-                                        Add Session
-                                    </button>
-                                </form>
-                                {% else %}
                                 <div class="flex items-center text-xs text-gray-500">
                                     <i data-lucide="calendar" class="w-3.5 h-3.5 mr-1.5"></i>
-                                    <span>{{ ss.completed_date|date:"M d, Y" }}</span>
+                                    {% if ss.is_completed %}
+                                        <span>Done: {{ ss.completed_date|date:"M d, Y" }}</span>
+                                    {% else %}
+                                        <span>Started: {{ ss.started_date|date:"M d, Y" }}</span>
+                                    {% endif %}
                                 </div>
-                                {% endif %}
                                 <div class="text-right">
-                                    <span class="text-[10px] font-medium text-gray-400">Started: {{ ss.started_date|date:"M d, Y" }}</span>
+                                    <span class="text-[10px] font-medium text-gray-400">
+                                        {% if ss.is_completed %}Completed{% else %}Active{% endif %}
+                                    </span>
                                 </div>
                             </div>
                         </div>

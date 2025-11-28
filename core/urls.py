@@ -9,6 +9,7 @@ urlpatterns = [
     path('<int:client_id>/start-service/', views.start_service_session, name='start_service_session'),
     path('service-session/<int:service_session_id>/delete/', views.delete_service_session, name='delete_service_session'),
     path('client-package/<int:client_package_id>/delete/', views.delete_client_package, name='delete_client_package'),
+    path('adjust-session/<str:item_type>/<int:item_id>/', views.adjust_session_count, name='adjust_session_count'),
     # Backup management
     path('backup/', views.backup_management, name='backup_management'),
     path('backup/create/', views.create_backup, name='create_backup'),

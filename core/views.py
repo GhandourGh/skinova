@@ -197,6 +197,62 @@ def start_service_session(request, client_id):
 
 @login_required
 @require_POST
+def adjust_session_count(request, item_type, item_id):
+    """Adjust session count (increment/decrement)"""
+    action = request.POST.get('action')
+    client_id = None
+    
+    try:
+        if item_type == 'package':
+            item = get_object_or_404(ClientPackage, id=item_id)
+            total_sessions = item.package.total_sessions
+        elif item_type == 'service':
+            item = get_object_or_404(ClientServiceSession, id=item_id)
+            total_sessions = item.service.sessions_required
+        else:
+            return redirect('admin:index')
+            
+        client_id = item.client.id
+        
+        if action == 'increment':
+            # Use the model's add_session method if available, or manual logic
+            if hasattr(item, 'add_session'):
+                if not item.is_completed:
+                    item.add_session()
+                    messages.success(request, 'Session added.')
+                else:
+                    messages.warning(request, 'Already completed.')
+            else:
+                # Manual increment if no method (fallback)
+                if item.sessions_completed < total_sessions:
+                    item.sessions_completed += 1
+                    if item.sessions_completed >= total_sessions:
+                        item.is_completed = True
+                        item.completed_date = datetime.now().date()
+                    item.save()
+                    messages.success(request, 'Session added.')
+                    
+        elif action == 'decrement':
+            if item.sessions_completed > 0:
+                item.sessions_completed -= 1
+                item.is_completed = False
+                item.completed_date = None
+                item.save()
+                messages.success(request, 'Session removed.')
+            else:
+                messages.warning(request, 'Cannot go below 0.')
+                
+    except Exception as e:
+        messages.error(request, f'Error adjusting session: {str(e)}')
+        if client_id:
+            return redirect('client_profile', client_id=client_id)
+        return redirect('admin:index')
+    
+    return redirect('client_profile', client_id=client_id)
+
+
+@login_required
+@require_POST
 def delete_service_session(request, service_session_id):
     """Delete a client service session"""
     try:
