@@ -11,7 +11,7 @@ import os
 import zipfile
 import io
 from .models import Client
-from appointments.models import ClientPackage, ClientServiceSession, Package
+from appointments.models import ClientPackage, ClientServiceSession, Package, Service
 
 
 @login_required
@@ -29,11 +29,16 @@ def client_profile(request, client_id):
     assigned_package_ids = client_packages.values_list('package_id', flat=True)
     available_packages = Package.objects.filter(is_active=True).exclude(id__in=assigned_package_ids).prefetch_related('services')
     
+    # Get available services for assignment (active services)
+    # We can filter out services already being tracked if desired, or allow multiple
+    available_services = Service.objects.filter(is_active=True)
+    
     context = {
         'client': client,
         'client_packages': client_packages,
         'service_sessions': service_sessions,
         'available_packages': available_packages,
+        'available_services': available_services,
     }
     
     return render(request, 'core/client_profile.html', context)

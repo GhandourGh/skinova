@@ -258,12 +258,29 @@
         <!-- Individual Services Section -->
         <div class="card-modern rounded-2xl shadow-lg mb-8 overflow-hidden animate-slide-in" style="animation-delay: 0.2s">
             <div class="section-header px-8 py-5">
-                <h2 class="text-xl font-bold text-gray-900 flex items-center">
-                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#2D5016] to-[#4a7c2a] flex items-center justify-center mr-3 shadow-md">
-                        <i data-lucide="activity" class="w-5 h-5 text-white"></i>
-                    </div>
-                    Individual Services
-                </h2>
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl font-bold text-gray-900 flex items-center">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#2D5016] to-[#4a7c2a] flex items-center justify-center mr-3 shadow-md">
+                            <i data-lucide="activity" class="w-5 h-5 text-white"></i>
+                        </div>
+                        Individual Services
+                    </h2>
+                    {% if available_services %}
+                    <form method="post" action="{% url 'start_service_session' client.id %}" class="flex items-center space-x-3">
+                        {% csrf_token %}
+                        <select name="service_id" class="px-4 py-2.5 border border-gray-300 rounded-xl text-sm font-medium text-gray-700 bg-white focus:ring-2 focus:ring-[#2D5016] focus:border-transparent transition-all" required>
+                            <option value="">Select Service...</option>
+                            {% for service in available_services %}
+                                <option value="{{ service.id }}">{{ service.name }} ({{ service.sessions_required }} sessions)</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit" class="btn-primary inline-flex items-center px-5 py-2.5 rounded-xl text-white font-semibold shadow-lg">
+                            <i data-lucide="plus" class="w-4 h-4 mr-2"></i>
+                            Start
+                        </button>
+                    </form>
+                    {% endif %}
+                </div>
             </div>
             
             <div class="p-8">
